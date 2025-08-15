@@ -1,4 +1,4 @@
-import BlogSection from '@/components/Blogsection';
+import BlogSection from '@/components/BlogSection';
 import React from 'react';
 import { blogs } from '@/constants/blogs';
 
