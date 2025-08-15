@@ -1,0 +1,12 @@
+import React from 'react'
+import { cn } from "@/lib/utils";
+
+const Container = ({children,className}) => {
+  return (
+    <div>
+      <div className={cn("max-w-screen mx-auto px-4",className)}>{children}</div> 
+    </div>
+  )
+}
+
+export default Container
