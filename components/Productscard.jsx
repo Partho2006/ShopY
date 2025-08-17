@@ -24,7 +24,7 @@ const Productscard = ({ products }) => {
   };
 
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 p-2">
+    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 p-2 mt-4">
       {products.map((product) => {
         const OutofStock = product.inStock === 0;
 
@@ -34,7 +34,7 @@ const Productscard = ({ products }) => {
             className="border-2 rounded-lg p-4 shadow hover:shadow-lg transition flex justify-between items-center flex-col bg-[#fffaf5]"
           >
             {/* Badge + Like Button */}
-            <div className="flex justify-around items-center gap-35">
+            <div className="flex justify-around items-center gap-29">
               <span className="text-sm font-semibold text-red-500">
                 {product.badge}
               </span>

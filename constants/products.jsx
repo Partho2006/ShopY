@@ -101,7 +101,7 @@ const products = [
     badge: "Sale!",
     isOnSale: true,
     brand: "Sony",
-    description:"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod. The WH-CH520 headphones with up to 50 hours of battery life, stable connectivity, and enhanced call performance, meet the demands of your day."
+    description:"The WH-CH520 headphones with up to 50 hours of battery life, stable connectivity, and enhanced call performance, meet the demands of your day."
   },
   { 
     id:8,

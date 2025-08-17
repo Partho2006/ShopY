@@ -24,13 +24,13 @@ const SideMenu = ({ isOpen, onClose }) => {
                 <div ref={sidebar} className='flex flex-col space-y-4 mt-10 text-white text-lg top-0'>
                     {data.map((item) => (
                         <Link key={item.title} href={item.link} className={`relative group hover:text-shop_light_green transition-all duration-300 font-semibold 
-                         ${pathname === item.link ? 'text-shop_light_green' : ''}`}>
+                         ${pathname === item.link ? 'text-shop_light_green' : ''}`} onClick={onClose}>
                             {item.title}
                         </Link>
                     ))}
                 </div>
                 <div>
-                    <SocialMedia />
+                    <SocialMedia onClick={onClose}/>
                 </div>
             </div>
         </div>
