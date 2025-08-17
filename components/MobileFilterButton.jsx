@@ -18,7 +18,7 @@ export default function MobileFilterButton({
         <div className="text-white">
             {/* Button (only visible on mobile) */}
             <button
-                className="md:hidden flex items-center px-4 py-2 gap-2 border rounded-lg shadow-sm w-full justify-center text-black font-semibold"
+                className="md:hidden flex items-center px-4 py-2 gap-2 border rounded-lg shadow-sm w-full justify-center text-black font-semibold mt-3"
                 onClick={() => setIsOpen(true)}
             >
                 <AlignLeft />

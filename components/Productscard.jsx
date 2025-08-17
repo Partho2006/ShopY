@@ -44,7 +44,10 @@ const Productscard = ({ products }) => {
                     ? "Remove from favorites"
                     : "Add to favorites"
                 }
-                onClick={() => toggleLike(product)}
+                onClick={(e) => {
+                  e.stopPropagation(); // prevent link click
+                  toggleLike(product);
+                }}
                 className={`w-6 h-6 flex justify-center items-center transition-all duration-300 rounded-full ${favorites.some((fav) => fav.id === product.id)
                   ? "text-red-500"
                   : "text-gray-500 hover:text-red-500"
@@ -52,6 +55,7 @@ const Productscard = ({ products }) => {
               >
                 ♥
               </button>
+
             </div>
             <Link href={`/product/${product.id}`} className="flex justify-between items-center flex-col">
               <img
@@ -64,7 +68,7 @@ const Productscard = ({ products }) => {
               <p className="text-xs text-gray-500">{product.category}</p>
               <h3 className="text-sm font-semibold">{product.title}</h3>
             </Link>
-            
+
             {/* Rating */}
             <div className="flex items-center text-sm text-shop_dark_green">
               {"★".repeat(product.rating)}
@@ -92,14 +96,19 @@ const Productscard = ({ products }) => {
             {/* Add to Cart */}
             <button
               disabled={OutofStock}
-              onClick={() => handleAddToCart(product)}
+              onClick={(e) => {
+                e.stopPropagation();
+                e.preventDefault();
+                handleAddToCart(product);
+              }}
               className={`mt-3 w-full py-1.5 rounded text-white transition ${OutofStock
-                ? "bg-gray-400 cursor-not-allowed"
-                : "bg-violet-600 hover:bg-violet-800"
+                  ? "bg-gray-400 cursor-not-allowed"
+                  : "bg-violet-600 hover:bg-violet-800"
                 }`}
             >
               {OutofStock ? "Out of Stock" : "Add to Cart"}
             </button>
+
           </div>
         );
       })}

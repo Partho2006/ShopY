@@ -7,7 +7,7 @@ const HomeTabBar = ({ selectedTab, setSelectedTab }) => {
                 {productType.map((item) => (
                     <button
                         key={item.title}
-                        className={`border-2 border-shop_light_green text-black  p-2 px-2 md:px-3 rounded-full transition-all duration-300
+                        className={`border-2 border-shop_light_green text-black  p-2 px-2 md:px-3 rounded-full transition-all duration-300 mt-3
                           ${selectedTab === item.value ? 'bg-shop_light_green text-white' : 'bg-shop_light_green/30 hover:bg-shop_light_green/50'}`}
                         onClick={() => setSelectedTab(item.value)}
                     >
