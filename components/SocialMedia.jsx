@@ -1,6 +1,6 @@
 import { Github, Linkedin, Youtube, Twitter, Facebook } from 'lucide-react'
 import React from 'react'
-import { Tooltip, TooltipProvider, TooltipTrigger, TooltipContent } from './ui/tooltip'
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 
 const SocialLink = [
   {
@@ -36,15 +36,20 @@ const SocialMedia = () => {
       <div>
         <div className='flex items-start justify-between mt-4'>
           {SocialLink.map((item) => (
-            <Tooltip key={item.title} >
+            <Tooltip key={item.title}>
               <TooltipTrigger asChild>
-                <a href={item.link} target="_blank" rel='noopener noreferrer' className='text-lightColor p-2 border-1 rounded-full hover:text-shop_light_green transform-all duration-200 hover:border-shop_light_green bg-black/10'>
+                <a
+                  href={item.link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-lightColor p-2 rounded-full hover:text-shop_light_green transition-colors duration-200 hover:border-shop_light_green bg-black/10"
+                >
                   {item.icon}
-                  <TooltipContent className="bg-white text-black font-semibold">
-                    {item.title}
-                  </TooltipContent>
                 </a>
               </TooltipTrigger>
+              <TooltipContent className="bg-white text-black font-semibold">
+                {item.title}
+              </TooltipContent>
             </Tooltip>
           ))}
         </div>
