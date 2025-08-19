@@ -46,7 +46,7 @@ export default function CategoryGrid() {
                     {categories.map((category) => (
                         <Link
                             key={category.slug}
-                            href={`${createPageUrl("Products")}?category=${category.slug}`}
+                            href="/shop"
                             className="group"
                         >
                             <div className="relative overflow-hidden rounded-2xl card-shadow bg-white transition-all duration-300 group-hover:shadow-lg group-hover:scale-[1.02]">
