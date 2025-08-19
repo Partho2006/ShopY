@@ -373,7 +373,82 @@ const products = [
     isOnSale: true,
     brand: "Zara",
     description:". Buy Jackets & Coats for Women. Huge collection of women's jackets & coats at low offer price & discounts at COD, Easy Returns & Exchanges. Order Now."
-  }
+  },
+  {
+    id:26,
+    title: "Merino Wool Sweater",
+    category: "Clothing, Women, Outerwear",
+    price: 195.00,
+    originalPrice: 200.00,
+    inStock: 20,
+    rating: 4.7,
+    reviews: 20,
+    image: " https://images.unsplash.com/photo-1434389677669-e08b4cac3105?w=500&h=500&fit=crop&crop=center",
+    badge: "Sale!",
+    isOnSale: true,
+    brand: "Nordic Knits",
+    description:"Ultra-soft merino wool sweater with a contemporary fit. Available in multiple colors."
+  },
+  {
+    id:27,
+    title: "Wireless Premium Headphones",
+    category: "Gadget Accessories,",
+    price: 349.00,
+    originalPrice: 400.00,
+    inStock: 25,
+    rating: 4.5,
+    reviews: 91,
+    image: " https://images.unsplash.com/photo-1484704849700-f032a568e944?w=500&h=500&fit=crop&crop=center",
+    badge: "Sale!",
+    isOnSale: true,
+    brand: "Samsung",
+    description:"Studio-quality wireless headphones with active noise cancellation and premium materials."
+  },
+  {
+    id:28,
+    title: "Italian Leather Handbag",
+    category: "Clothing, Women, Outerwear",
+    price: 895.00,
+    originalPrice: 1000.00,
+    inStock: 8,
+    rating: 4.5,
+    reviews: 120,
+    image: " https://images.unsplash.com/photo-1584917865442-de89df76afd3?w=500&h=500&fit=crop&crop=center",
+    badge: "🔥",
+    isOnSale: true,
+    brand: "Milano Craft",
+    description:"Exquisite full-grain Italian leather handbag with handstitched details and premium hardware. A timeless piece for any wardrobe."
+  },
+  {
+    id:29,
+    title: "Organic Cotton Shirt",
+    category: "Clothing, Mmen, Outerwear",
+    price: 89.00,
+    originalPrice: 100.00,
+    inStock: 30,
+    rating: 4.4,
+    reviews: 80,
+    image: " https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=500&h=500&fit=crop&crop=center",
+    badge: "Sale!",
+    isOnSale: true,
+    brand: "Sustainable Style",
+    description:"Premium organic cotton shirt with a relaxed fit. Ethically made and incredibly soft."
+  },
+  {
+    id:30,
+    title: "Cashmere Luxury Scarf",
+    category: "Clothing, Outerwear",
+    price: 295.00,
+    originalPrice: 349.00,
+    inStock: 22,
+    rating: 4.2,
+    reviews: 80,
+    image: " https://images.unsplash.com/photo-1601924994987-69e26d50dc26?w=500&h=500&fit=crop&crop=center",
+    badge: "Sale!",
+    isOnSale: true,
+    brand: "Artisan Studio",
+    description:"Handwoven cashmere scarf from the finest Mongolian cashmere. Soft, lightweight, and perfectly crafted for any season."
+  },
 ];
 
 export default products;

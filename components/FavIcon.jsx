@@ -45,35 +45,35 @@ export default function Favorites() {
             ) : (
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 max-h-80 overflow-y-auto">
                 {favorites.map((product, index) => (
+                  <div className="p-3 rounded border-2 border-shop_light_green hover:border-shop_dark_green hover:bg-violet-200 flex items-center">
                     <Link
                       key={`link-${product.id}`}
                       href={`/product/${product.id}`}
                       onClick={() => setIsSearchOpen(false)}
-                      className="p-3 rounded border-2 border-shop_light_green hover:border-shop_dark_green hover:bg-violet-200 flex items-center gap-3"
+                      className="flex items-center gap-3"
                     >
-                      
-                        {/* Product image */}
-                        <img
-                          src={product.image}
-                          alt={product.title}
-                          className="w-20 h-20 object-contain rounded transition-transform duration-300 hover:scale-100"
-                        />
-
-                        {/* Product info */}
-                        <div className="flex-1">
-                          <h3 className="font-semibold">{product.title}</h3>
-                          <p className="text-sm text-gray-500">{product.brand}</p>
-                          <p className="font-bold text-shop_dark_green">${product.price.toFixed(2)}</p>
-                        </div>
-
-                        {/* Remove button */}
-                        <button
-                          onClick={() => removeFromFavorites(product.id)}
-                          className="text-sm text-red-500 hover:underline font-semibold"
-                        >
-                          Remove
-                        </button>
-                    </Link>
+                      {/* Product image */}
+                      <img
+                        src={product.image}
+                        alt={product.title}
+                        className="w-20 h-20 object-contain rounded transition-transform duration-300 hover:scale-100"
+                      />
+                    
+                    {/* Product info */}
+                    <div className="flex-1">
+                      <h3 className="font-semibold">{product.title}</h3>
+                      <p className="text-sm text-gray-500">{product.brand}</p>
+                      <p className="font-bold text-shop_dark_green">${product.price.toFixed(2)}</p>
+                    </div>
+</Link>
+                    {/* Remove button */}
+                    <button
+                      onClick={() => removeFromFavorites(product.id)}
+                      className="text-sm text-red-500 hover:underline font-semibold"
+                    >
+                      Remove
+                    </button>
+                  </div>
                 ))}
               </div>
             )}
