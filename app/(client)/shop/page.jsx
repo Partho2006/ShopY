@@ -1,7 +1,10 @@
 // app/shop/page.jsx
+"use client";
+
 import Shop from "@/components/Shop";
 import { FavoritesProvider } from "@/components/FavoritesContext";
 import Link from "next/link";
+import { Suspense } from "react";
 
 export default function ShopPage() {
   return (
@@ -31,10 +34,12 @@ export default function ShopPage() {
             </p>
           </div>
 
-          <Shop />
+          {/* ✅ Wrap Shop in Suspense */}
+          <Suspense fallback={<div className="text-gray-500">Loading products...</div>}>
+            <Shop />
+          </Suspense>
         </section>
       </main>
     </FavoritesProvider>
   );
 }
-
