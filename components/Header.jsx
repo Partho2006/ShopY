@@ -15,7 +15,7 @@ const Header = async () => {
   const user = await currentUser()
 
   return (
-    <header className='py-3 border-b border-black/20 sticky top-0 z-50 backdrop-blur-md bg-white/70'>
+    <header className='py-3 border-b border-black/20 sticky top-0 z-50 backdrop-blur-md bg-shop_light_green/30'>
       <Container className="flex items-center justify-between">
         <HeaderClient user={user} />
       </Container>

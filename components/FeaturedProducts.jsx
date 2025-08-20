@@ -17,15 +17,15 @@ export default function FeaturedProducts() {
   const featured = products.filter((p) => [26, 27, 28, 29, 30, 9].includes(p.id));
 
   return (
-    <section className="py-20 bg-white">
+    <section className="py-10 bg-gradient-to-r from-shop_dark_green to-shop_light_green rounded-3xl shadow-inner">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="flex flex-col md:flex-row justify-between items-center mb-12">
           <div>
-            <h2 className="text-3xl md:text-4xl font-bold text-[#1a1a1a] mb-4 tracking-tight">
-              Featured Products
-            </h2>
-            <p className="text-gray-600 text-lg">
+            <h2 className="text-3xl font-extrabold text-center text-white mb-10">
+            ✨ Featured Products
+          </h2>
+            <p className="text-white text-lg flex justify-between items-center">
               Handpicked favorites just for you.
             </p>
           </div>

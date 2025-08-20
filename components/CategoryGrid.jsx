@@ -34,8 +34,8 @@ export default function CategoryGrid() {
         <section className="py-15 bg-[#fafafa]">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="text-center mb-12">
-                    <h2 className="text-3xl md:text-4xl font-bold text-[#1a1a1a] mb-4 tracking-tight">
-                        Shop by Category
+                    <h2 className="text-3xl font-extrabold text-center text-shop_dark_green mb-10">
+                        🛍️ Shop by Categories
                     </h2>
                     <p className="text-gray-600 text-lg max-w-2xl mx-auto">
                         Explore our carefully curated collections, each designed to elevate your lifestyle.
@@ -46,7 +46,7 @@ export default function CategoryGrid() {
                     {categories.map((category) => (
                         <Link
                             key={category.slug}
-                            href="/shop"
+                            href={`/shop?category=${encodeURIComponent(category.name)}`}
                             className="group"
                         >
                             <div className="relative overflow-hidden rounded-2xl card-shadow bg-white transition-all duration-300 group-hover:shadow-lg group-hover:scale-[1.02]">
@@ -72,4 +72,4 @@ export default function CategoryGrid() {
             </div>
         </section>
     );
-}
+} 

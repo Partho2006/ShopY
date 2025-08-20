@@ -1,121 +1,98 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useSearchParams } from "next/navigation"; // ✅ Next.js hook
 import products from "@/constants/products";
 import NoProductAvailable from "./NoProducts Available";
-import { useFavorites } from "@/components/FavoritesContext";
-import { useCart } from "@/components/CartContext";
-import Productscard from "./Productscard"; // ✅ import your product card component
-import MobileFilterButton from "./MobileFilterButton"
+import Productscard from "./Productscard";
+import MobileFilterButton from "./MobileFilterButton";
+import { Slider } from "@/components/ui/slider";
 
 export default function Shop() {
-  const [category, setCategory] = useState(null);
-  const [selectedBrand, setSelectedBrand] = useState(null);
-  const [selectedPrice, setSelectedPrice] = useState(null);
+  const searchParams = useSearchParams();
+  const initialCategory = searchParams.get("category"); // ✅ read from URL
 
-  const { favorites, addToFavorites, removeFromFavorites } = useFavorites();
-  const { addToCart } = useCart();
-
-  // Price range helper
-  const priceInRange = (price, range) => {
-    switch (range) {
-      case "Under $100": return price < 100;
-      case "$100-$300": return price >= 100 && price <= 300;
-      case "$300-$500": return price > 300 && price <= 500;
-      case "Over $500": return price > 500;
-      default: return true;
-    }
-  };
+  const [category, setCategory] = useState(initialCategory);
+  const [priceRange, setPriceRange] = useState([0, 1000]);
 
   // Filtering logic
   const filteredProducts = products.filter((p) => {
-    const categoryMatch = !category || p.category.split(",").map(c => c.trim()).includes(category);
-    const brandMatch = !selectedBrand || p.brand === selectedBrand;
-    const priceMatch = !selectedPrice || priceInRange(p.price, selectedPrice);
-    return categoryMatch && brandMatch && priceMatch;
+    const categoryMatch =
+      !category || p.category.split(",").map((c) => c.trim()).includes(category);
+    const priceMatch = p.price >= priceRange[0] && p.price <= priceRange[1];
+    return categoryMatch && priceMatch;
   });
 
   return (
-    <div className="lg:px-6 gap-6 border-t-2">
+    <div className="gap-6 border-t-2">
       <MobileFilterButton
         category={category}
         setCategory={setCategory}
-        selectedBrand={selectedBrand}
-        setSelectedBrand={setSelectedBrand}
-        selectedPrice={selectedPrice}
-        setSelectedPrice={setSelectedPrice}
+        priceRange={priceRange}
+        setPriceRange={setPriceRange}
       />
       <div className="flex">
         {/* Sidebar */}
-        <aside className="lg:w-1/6 w-1/4 bg-white md:p-5 p-1 shadow border-r-2 hidden md:block">
-          <h2 className="font-bold text-lg mb-3">Categories</h2>
-          <div className="space-y-2 border-b border-shop_light_green pb-3">
+        {/* Sidebar */}
+        <aside className=" bg-white md:p-6 p-3 shadow-lg border-r border-gray-200 hidden md:block rounded-2xl">
+          {/* Categories */}
+          <h2 className="font-bold text-lg mb-4 text-shop_dark_green border-b pb-2 border-gray-300">
+            Categories
+          </h2>
+          <div className="space-y-2">
             {[
-              "Men", "Women", "Clothing", "Kitchen Appliances",
-              "Television", "Refrigerators", "Washing Machine", "Smartphones",
-              "Mobiles", "Cameras", "Airbuds",
+              "Men", "Women", "Clothing", "Home",
+              "Accessories", "Appliances", "Smartphones", "Cameras", "Headphones",
             ].map((cat) => (
-              <label
+              <button
                 key={cat}
-                className={`flex items-center gap-2 cursor-pointer lg:font-semibold hover:text-shop_dark_green transition-all duration-200 ${category === cat ? "text-shop_dark_green font-bold" : ""}`}
+                onClick={() => setCategory((prev) => (prev === cat ? null : cat))}
+                className={`w-full text-left px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300 flex items-center gap-2
+          ${category === cat
+                    ? "bg-shop_dark_green text-white shadow-md scale-[1.02]"
+                    : "bg-gray-50 hover:bg-shop_light_green/20 text-shop_dark_green hover:text-shop_dark_green"
+                  }`}
               >
-                <input
-                  type="checkbox"
-                  checked={category === cat}
-                  onChange={() => setCategory(prev => prev === cat ? null : cat)}
-                />
+                <span
+                  className={`w-2 h-2 rounded-full transition-colors ${category === cat ? "bg-white" : "bg-shop_dark_green/40"
+                    }`}
+                ></span>
                 {cat}
-              </label>
+              </button>
             ))}
           </div>
 
-          <h2 className="font-bold text-lg mt-3 mb-3">Brands</h2>
-          <div className="space-y-2 border-b border-shop_light_green pb-3">
-            {["Apple", "Samsung", "Sony", "Nike", "Zara", "Levi's"].map((brand) => (
-              <label
-                key={brand}
-                className={`flex items-center gap-2 cursor-pointer lg:font-semibold hover:text-shop_dark_green transition-all duration-200 ${selectedBrand === brand ? "text-shop_dark_green font-bold" : ""}`}
-              >
-                <input
-                  type="checkbox"
-                  checked={selectedBrand === brand}
-                  onChange={() => setSelectedBrand(prev => prev === brand ? null : brand)}
-                />
-                {brand}
-              </label>
-            ))}
-          </div>
-
-          <h2 className="font-bold text-lg mt-3 mb-3">Price</h2>
-          <div className="space-y-2 border-b border-shop_light_green pb-3">
-            {["Under $100", "$100-$300", "$300-$500", "Over $500"].map((range) => (
-              <label
-                key={range}
-                className={`flex items-center gap-2 cursor-pointer lg:font-semibold hover:text-shop_dark_green transition-all duration-200 ${selectedPrice === range ? "text-shop_dark_green font-bold" : ""}`}
-              >
-                <input
-                  type="checkbox"
-                  checked={selectedPrice === range}
-                  onChange={() => setSelectedPrice(prev => prev === range ? null : range)}
-                />
-                {range}
-              </label>
-            ))}
+          {/* Price Slider */}
+          <h2 className="font-bold text-lg mt-6 mb-3 text-shop_dark_green border-b pb-2 border-gray-300">
+            Price
+          </h2>
+          <div className="px-2">
+            <Slider
+              min={0}
+              max={1000}
+              step={10}
+              value={priceRange}
+              onValueChange={setPriceRange}
+              className="w-full text-shop_dark_green"
+            />
+            <div className="flex justify-between mt-3 text-sm text-shop_dark_green font-semibold">
+              <span>${priceRange[0]}</span>
+              <span>${priceRange[1]}</span>
+            </div>
           </div>
         </aside>
 
         {/* Product Grid */}
-        <main className="md:w-3/4 p-0 w-full">
+        <main className="w-full px-4 py-5 m-2 bg-gradient-to-r from-shop_dark_green to-shop_light_green rounded-3xl shadow-inner">
           {filteredProducts.length === 0 ? (
             <NoProductAvailable
-              selectedTab={category || selectedBrand || selectedPrice}
+              selectedTab={category || priceRange}
               className="w-full"
             />
           ) : (
-            <Productscard products={filteredProducts} /> // ✅ use your reusable component
+            <Productscard products={filteredProducts} />
           )}
         </main>
       </div>
-
     </div>
   );
 }

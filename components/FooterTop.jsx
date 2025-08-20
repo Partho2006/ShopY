@@ -36,7 +36,7 @@ const FooterTop = () => {
     return (
         <div className='grid grid-cols-2 md:grid-cols-4 p-4 my-4  transition-colors border-t border-black/20'>
             {data.map((item, index) => (
-                <div key={index} className="flex group hover:bg-gray-200 p-3 items-center space-x-2 rounded-xl">
+                <div key={index} className="flex group hover:bg-violet-400 p-3 items-center space-x-2 rounded-xl transition-all duration-300">
                     <div>
                         {item.icon}
                     </div>

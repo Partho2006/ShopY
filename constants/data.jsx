@@ -1,7 +1,8 @@
 const data = [
   { title: "Home", link: "/" },
   { title: "Shop", link: "/shop" },
-  { title: "Blog", link: "/blog" },
+  { title: "About", link: "/about" },
+  { title: "Contact", link: "/contact" },
   { title: "Hot Deal", link: "/hotdeals" },
 ];
 
@@ -17,13 +18,12 @@ export const quickLinksData = [
 ];
 
 export const categoriesData = [
-  { title: "Mobiles", href: "mobiles" },
-  { title: "Appliances", href: "appliances" },
-  { title: "Smartphones", href: "smartphones" },
-  { title: "Air Conditioners", href: "air-conditioners" },
-  { title: "Washing Machine", href: "washing-machine" },
-  { title: "Kitchen Appliances", href: "kitchen-appliances" },
-  { title: "gadget accessories", href: "gadget-accessories" },
+  { title: "Appliances", href: "/shop" },
+  { title: "Smartphones", href: "/shop" },
+  { title: "Air Conditioners", href: "/shop" },
+  { title: "Washing Machine", href: "/shop" },
+  { title: "Kitchen Appliances", href: "/shop" },
+  { title: "gadget accessories", href: "/shop" },
 ];
 export const productType = [ 
   { title: "Gadget", value: "gadget" },

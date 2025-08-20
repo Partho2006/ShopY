@@ -1,115 +1,83 @@
 "use client";
 import React from "react";
-import { useFavorites } from "@/components/FavoritesContext";
-import { useCart } from "@/components/CartContext";
 import Link from "next/link";
+import { Star } from "lucide-react";
 
 const Productscard = ({ products }) => {
-  const { favorites, addToFavorites, removeFromFavorites } = useFavorites();
-  const { addToCart } = useCart();
-
-  // ❤️ Toggle favorite
-  const toggleLike = (product) => {
-    if (favorites.some((fav) => fav.id === product.id)) {
-      removeFromFavorites(product.id);
-    } else {
-      addToFavorites(product);
-    }
-  };
-
-  // 🛒 Add to cart
-  const handleAddToCart = (product) => {
-    addToCart(product);
-    window.alert("Added to cart");
-  };
-
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 p-2 mt-4">
+    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 md:gap-8 mt-6">
       {products.map((product) => {
         const OutofStock = product.inStock === 0;
 
         return (
-          <div
+          <Link
             key={product.id}
-            className="border-2 rounded-lg p-4 shadow hover:shadow-lg transition flex justify-between items-center flex-col bg-[#fffaf5]"
+            href={`/product/${product.id}`}
+            className="group"
           >
-            {/* Badge + Like Button */}
-            <div className="flex justify-around items-center gap-29">
-              <span className="text-sm font-semibold text-red-500">
-                {product.badge}
-              </span>
-              <button
-                title={
-                  favorites.some((fav) => fav.id === product.id)
-                    ? "Remove from favorites"
-                    : "Add to favorites"
-                }
-                onClick={(e) => {
-                  e.stopPropagation(); // prevent link click
-                  toggleLike(product);
-                }}
-                className={`w-6 h-6 flex justify-center items-center transition-all duration-300 rounded-full ${favorites.some((fav) => fav.id === product.id)
-                  ? "text-red-500"
-                  : "text-gray-500 hover:text-red-500"
-                  }`}
-              >
-                ♥
-              </button>
-
-            </div>
-            <Link href={`/product/${product.id}`} className="flex justify-between items-center flex-col">
-              <img
-                src={product.image}
-                alt={product.title}
-                className="w-full h-40 object-contain mb-4 transition-transform duration-300 hover:scale-105"
-              />
-
-              {/* Info */}
-              <p className="text-xs text-gray-500">{product.category}</p>
-              <h3 className="text-sm font-semibold">{product.title}</h3>
-            </Link>
-
-            {/* Rating */}
-            <div className="flex items-center text-sm text-shop_dark_green">
-              {"★".repeat(product.rating)}
-              <span className="ml-1 text-gray-600">
-                ({product.reviews} Reviews)
-              </span>
-            </div>
-
-            {/* Stock + Price */}
-            <p className="text-sm text-gray-700 mt-1">
-              In Stock: {product.inStock}
-            </p>
-            <p className="text-base font-bold text-shop_dark_green">
-              {typeof product.price === "number"
-                ? `$${product.price.toFixed(2)}`
-                : "Price N/A"}
-              {product.originalPrice &&
-                typeof product.originalPrice === "number" && (
-                  <span className="line-through text-gray-400 text-sm ml-2">
-                    ${product.originalPrice.toFixed(2)}
-                  </span>
+            <div className="card-shadow rounded-2xl overflow-hidden transition-all duration-300 group-hover:shadow-lg bg-shop_light_pink group-hover:scale-[1.02]">
+              {/* Product Image */}
+              <div className="aspect-square overflow-hidden bg-gray-50">
+                {product.image ? (
+                  <img
+                    src={product.image}
+                    alt={product.title}
+                    className="w-full h-full object-contain transition-transform duration-700 group-hover:scale-110"
+                  />
+                ) : (
+                  <div className="w-full h-full bg-gradient-to-br from-gray-100 to-gray-200 flex items-center justify-center">
+                    <span className="text-gray-400 text-lg font-medium">
+                      {product.title.charAt(0)}
+                    </span>
+                  </div>
                 )}
-            </p>
+              </div>
 
-            {/* Add to Cart */}
-            <button
-              disabled={OutofStock}
-              onClick={(e) => {
-                e.stopPropagation();
-                e.preventDefault();
-                handleAddToCart(product);
-              }}
-              className={`mt-3 w-full py-1.5 rounded text-white transition ${OutofStock
-                  ? "bg-gray-400 cursor-not-allowed"
-                  : "bg-violet-600 hover:bg-violet-800"
-                }`}
-            >
-              {OutofStock ? "Out of Stock" : "Add to Cart"}
-            </button>
+              {/* Product Info */}
+              <div className="p-5 space-y-3">
+                <div className="flex items-center justify-between">
+                  <h3 className="font-semibold text-[#1a1a1a] group-hover:text-[#6b7c6f] transition-colors truncate">
+                    {product.title}
+                  </h3>
+                  {product.rating && (
+                    <div className="flex items-center">
+                      <Star className="w-4 h-4 text-yellow-400 fill-current" />
+                      <span className="text-sm text-gray-600 ml-1">
+                        {product.rating}
+                      </span>
+                    </div>
+                  )}
+                </div>
 
-          </div>
+                <p className="text-gray-600 text-sm line-clamp-2">
+                  {product.description || product.category}
+                </p>
+
+                <div className="flex items-center justify-between">
+                  <span className="text-lg font-bold text-shop_dark_green">
+                    {typeof product.price === "number"
+                      ? `$${product.price.toFixed(2)}`
+                      : "Price N/A"}
+                  </span>
+
+                  {product.brand && (
+                    <span className="text-xs text-shop_light_green font-medium">
+                      {product.brand}
+                    </span>
+                  )}
+                </div>
+
+                {/* Stock Info */}
+                <p
+                  className={`text-xs font-medium ${
+                    OutofStock ? "text-red-500" : "text-gray-500"
+                  }`}
+                >
+                  {OutofStock ? "Out of Stock" : `In Stock: ${product.inStock}`}
+                </p>
+              </div>
+            </div>
+          </Link>
         );
       })}
     </div>
