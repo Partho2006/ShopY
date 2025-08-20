@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { createPageUrl } from "@/utils";
 import { Star, ArrowRight } from "lucide-react";
-import { Skeleton } from "@/components/ui/skeleton";
+import { Skeleton } from "@/components/ui/Skeleton";
 import products from "@/constants/products"; // ✅ your product list
 
 export default function FeaturedProducts() {
